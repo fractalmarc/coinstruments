@@ -30,12 +30,11 @@ export const AppProvider: React.FunctionComponent<{}> = ({ children }) => {
       .then(response => response.json())
       .then(responseJson => {
         // Hack for display purposes only :-D
+
         const newInstruments = doJitterData
           ? responseJson.map(inst => ({
               ...inst,
-              dailyVolume:
-                inst.dailyVolume *
-                (Math.random() + (0.05 - Math.random() / 1000)),
+              dailyVolume: inst.dailyVolume * (1 + Math.random() / 5000),
               dailyChange: inst.dailyChange * (1.0 + Math.random() / 100)
             }))
           : responseJson;
