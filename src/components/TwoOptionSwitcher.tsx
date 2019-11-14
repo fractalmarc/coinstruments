@@ -10,44 +10,46 @@ interface TwoOptionSwitcherProps {
   currentOption: number;
   setCurrentOption: (opt: number) => void;
 }
+interface SwitcherCellProps {
+  onPress: () => void;
+  label: string;
+  isSelected: boolean;
+}
+
+const SwitcherCell = (props: SwitcherCellProps) => {
+  return (
+    <TouchableOpacity
+      onPress={props.onPress}
+      style={[
+        theme.twoOptionSwitcher.basicOptionStyle,
+        props.isSelected && theme.twoOptionSwitcher.selectedOptionStyle
+      ]}
+    >
+      <Text
+        style={[
+          theme.twoOptionSwitcher.label,
+          props.isSelected && theme.twoOptionSwitcher.labelSelected
+        ]}
+      >
+        {props.label}
+      </Text>
+    </TouchableOpacity>
+  );
+};
 
 export const TwoOptionSwitcher = (props: TwoOptionSwitcherProps) => {
-  const isOption1 = props.currentOption === 0;
-  const isOption2 = props.currentOption === 1;
   return (
     <View style={theme.twoOptionSwitcher.container}>
-      <TouchableOpacity
+      <SwitcherCell
+        isSelected={props.currentOption === 0}
+        label={props.option1}
         onPress={() => props.setCurrentOption(0)}
-        style={[
-          theme.twoOptionSwitcher.basicOptionStyle,
-          isOption1 && theme.twoOptionSwitcher.selectedOptionStyle
-        ]}
-      >
-        <Text
-          style={[
-            theme.twoOptionSwitcher.label,
-            isOption1 && theme.twoOptionSwitcher.labelSelected
-          ]}
-        >
-          {props.option1}
-        </Text>
-      </TouchableOpacity>
-      <TouchableOpacity
+      />
+      <SwitcherCell
+        isSelected={props.currentOption === 1}
+        label={props.option2}
         onPress={() => props.setCurrentOption(1)}
-        style={[
-          theme.twoOptionSwitcher.basicOptionStyle,
-          isOption2 && theme.twoOptionSwitcher.selectedOptionStyle
-        ]}
-      >
-        <Text
-          style={[
-            theme.twoOptionSwitcher.label,
-            isOption2 && theme.twoOptionSwitcher.labelSelected
-          ]}
-        >
-          {props.option2}
-        </Text>
-      </TouchableOpacity>
+      />
     </View>
   );
 };
