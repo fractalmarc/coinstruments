@@ -3,10 +3,19 @@ export enum Pages {
   InstrumentDetail = "InstrumentDetail",
 }
 
+
+// Unique ID identifying instrument
+export type InstrumentId = string;
+
 export interface Instrument {
-  name: string;
+  name: InstrumentId;
   dailyVolume: number;
   dailyChange: number;
   markPrice: number;
-  isFavorite: boolean;
+}
+
+export interface User {
+  id: number;
+  name: string;
+  favoriteInstruments: InstrumentId[];
 }
