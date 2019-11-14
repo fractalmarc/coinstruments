@@ -1,13 +1,11 @@
 import React, { useContext } from "react";
-import { theme, Fonts, Colors } from "../theme";
+import { theme, Colors } from "../theme";
 import { formatCurrency, formatDailyChange, colorForChange } from "../util";
 
 import { View, Text, StyleSheet, Switch } from "react-native";
 import { AppContext } from "../contexts/AppContext";
-import { useNavigation } from "react-navigation-hooks";
 
 export const InstrumentDetail = ({ setIsFavorite }) => {
-  const navigation = useNavigation();
   const { currInstrument, currUser, toggleIsFavorite } = useContext(AppContext);
   const leftColPercent = "50%";
   const rightColPercent = "50%";

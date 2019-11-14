@@ -7,8 +7,7 @@ import { InstrumentDetail } from "./src/pages/InstrumentDetail";
 import { InstrumentList } from "./src/pages/InstrumentList";
 import { Pages } from "./src/util/types";
 import { AppProvider } from "./src/contexts/AppContext";
-import { SafeAreaView } from "react-native";
-
+import { SafeAreaView, StatusBar, View } from "react-native";
 
 const MainNavigator = createStackNavigator(
   {
@@ -29,7 +28,7 @@ const MainNavigator = createStackNavigator(
       headerTintColor: Colors.BitmexBlue,
       headerTitleStyle: {
         fontWeight: "800",
-        fontSize: Fonts.Large,
+        fontSize: Fonts.Large
       }
     }
   }
@@ -40,7 +39,8 @@ const App = createAppContainer(MainNavigator);
 const ProvidedApp = () => {
   return (
     <AppProvider>
-      <SafeAreaView style={{ backgroundColor: "rgba(60,50,40,0.3", flex: 1 }}>
+      <SafeAreaView style={{ backgroundColor: Colors.Black, flex: 1 }}>
+        <StatusBar barStyle="light-content" />
         <App />
       </SafeAreaView>
     </AppProvider>
