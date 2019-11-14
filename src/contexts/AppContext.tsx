@@ -3,6 +3,8 @@ import { Instrument, User, InstrumentId } from "../util/types";
 import { defaultInstruments, defaultUser } from "../util/defaults";
 import _ from "lodash";
 
+// FUN: randomly jitter data to simulate changes?
+const doJitterData = true;
 export interface AppContextState {
   instruments: Array<Instrument>;
   currInstrument: Instrument;
@@ -23,16 +25,33 @@ export const AppProvider: React.FunctionComponent<{}> = ({ children }) => {
     setCurrUser({ ...currUser, favoriteInstruments: newFavorites });
   };
 
-  useEffect(() => {
+  const loadInstruments = () => {
     fetch("http://localhost:3000/data")
       .then(response => response.json())
       .then(responseJson => {
-        // TODO: validate data
-        setInstruments(responseJson);
+        // Hack for display purposes only :-D
+        const newInstruments = doJitterData
+          ? responseJson.map(inst => ({
+              ...inst,
+              dailyVolume:
+                inst.dailyVolume *
+                (Math.random() + (0.05 - Math.random() / 1000)),
+              dailyChange: inst.dailyChange * (1.0 + Math.random() / 100)
+            }))
+          : responseJson;
+        setInstruments(newInstruments);
       })
       .catch(err => {
         console.warn(`Error: ${err}`);
       });
+  };
+
+  useEffect(() => {
+    loadInstruments();
+    const timerId = setInterval(loadInstruments, 10);
+    return () => {
+      clearInterval(timerId);
+    };
   }, []);
 
   return (

@@ -1,9 +1,6 @@
 import React, { useContext, useState } from "react";
 import { theme, Fonts, Colors } from "../theme";
-import {
-  View,
-  FlatList
-} from "react-native";
+import { View, FlatList, Text, Switch } from "react-native";
 import { useNavigation } from "react-navigation-hooks";
 import { Pages, Instrument } from "../util/types";
 import { AppContext } from "../contexts/AppContext";
@@ -17,7 +14,9 @@ export const InstrumentList = () => {
 
   const loadInstrument = (instrument: Instrument) => {
     setCurrInstrument(instrument);
-    navigation.navigate(Pages.InstrumentDetail);
+    navigation.navigate(Pages.InstrumentDetail, {
+      instrumentId: instrument.name
+    });
   };
 
   const filtered = showFavorites
@@ -26,6 +25,8 @@ export const InstrumentList = () => {
       )
     : instruments;
   const ordered = filtered.sort((a, b) => b.dailyVolume - a.dailyVolume);
+
+  // TODO add switch to control jitter on/off setting
 
   return (
     <View style={theme.screen.container}>

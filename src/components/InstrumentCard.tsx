@@ -6,7 +6,7 @@ import {
   formatCurrency,
   colorForChange
 } from "../util/index";
-import { Text, View, StyleSheet, TouchableOpacity, Switch } from "react-native";
+import { Text, View, TouchableOpacity } from "react-native";
 
 interface InstrumentCardProps {
   onPress: () => void;
@@ -21,13 +21,13 @@ export const InstrumentCard: React.FunctionComponent<InstrumentCardProps> = ({
       <View style={theme.instrumentCard.container}>
         <Text style={theme.instrumentCard.cardTitle}>{instrument.name}</Text>
         <View style={theme.instrumentCard.detailRow}>
-          <Text style={{ ...theme.instrumentCard.cardContent, width: "70%" }}>
+          <Text style={{ ...theme.instrumentCard.cardContent, width: '72%' }}>
             Volume: {formatCurrency(instrument.dailyVolume)}
           </Text>
           <Text
             style={{
               ...theme.instrumentCard.cardContent,
-              width: "30%",
+              width: "28%",
               color: colorForChange(instrument.dailyChange),
               textAlign: "right"
             }}

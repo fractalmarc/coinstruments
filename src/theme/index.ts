@@ -58,7 +58,7 @@ export const theme1: Theme = {
     cardContent: {
       fontSize: Fonts.Small,
       color: Colors.White,
-      fontWeight: "500"
+      fontWeight: "400"
     }
   },
   instrumentDetail: {
