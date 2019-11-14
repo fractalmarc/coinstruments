@@ -10,10 +10,9 @@ import { TwoOptionSwitcher } from "../components/TwoOptionSwitcher";
 export const InstrumentList = () => {
   const navigation = useNavigation();
   const [showFavorites, setShowFavorites] = useState(false);
-  const { instruments, setCurrInstrument, currUser } = useContext(AppContext);
+  const { instruments, currUser } = useContext(AppContext);
 
   const loadInstrument = (instrument: Instrument) => {
-    setCurrInstrument(instrument);
     navigation.navigate(Pages.InstrumentDetail, {
       instrumentId: instrument.name
     });

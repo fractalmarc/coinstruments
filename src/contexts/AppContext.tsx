@@ -7,8 +7,6 @@ import _ from "lodash";
 const doJitterData = true;
 export interface AppContextState {
   instruments: Array<Instrument>;
-  currInstrument: Instrument;
-  setCurrInstrument: (Instrument) => void;
   toggleIsFavorite: (InstrumentId) => void;
   currUser: User;
 }
@@ -17,7 +15,6 @@ export const AppContext = React.createContext({} as AppContextState);
 
 export const AppProvider: React.FunctionComponent<{}> = ({ children }) => {
   const [instruments, setInstruments] = useState(defaultInstruments);
-  const [currInstrument, setCurrInstrument] = useState({} as Instrument);
   const [currUser, setCurrUser] = useState<User>(defaultUser);
 
   const toggleIsFavorite = (id: InstrumentId) => {
@@ -57,8 +54,6 @@ export const AppProvider: React.FunctionComponent<{}> = ({ children }) => {
     <AppContext.Provider
       value={{
         instruments,
-        currInstrument,
-        setCurrInstrument,
         currUser,
         toggleIsFavorite
       }}
